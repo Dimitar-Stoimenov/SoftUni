@@ -1,0 +1,16 @@
+div {
+    background: sandybrown;
+    border: 1px dotted black;
+}
+
+.first {
+    display: inline;
+    margin: 20px;
+    padding: 30px;
+}
+
+.second {
+    display: inline-block;
+    margin: 20px;
+    padding: 30px;
+}
