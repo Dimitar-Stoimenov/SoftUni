@@ -4,41 +4,40 @@ function solve(input) {
     let invitedList = input.slice(0, indexOfPARTY)
     let guests = input.slice(indexOfPARTY + 1)
 
-    let vipObj = []
-    let regularObj = []
+    let vipArray = []
+    let regularArray = []
 
     for (const element of invitedList) {
         if (element.charCodeAt(0) >= 48 && element.charCodeAt(0) <= 57) {
-            vipObj.push(element)
+            vipArray.push(element)
 
         } else {
-
-            regularObj.push(element)
+            regularArray.push(element)
         }
     }
 
     for (const element of guests) {
         if (element.charCodeAt(0) >= 48 && element.charCodeAt(0) <= 57) {
-            if (vipObj.includes(element)) {
-                let i = vipObj.findIndex(x => x === element)
-                vipObj.splice(i, 1)
+            if (vipArray.includes(element)) {
+                let i = vipArray.findIndex(x => x === element)
+                vipArray.splice(i, 1)
             }
 
         } else {
-            if (regularObj.includes(element)) {
-                let i = regularObj.findIndex(x => x === element)
-                regularObj.splice(i, 1)
+            if (regularArray.includes(element)) {
+                let i = regularArray.findIndex(x => x === element)
+                regularArray.splice(i, 1)
             }
         }
     }
 
-    console.log(vipObj.length + regularObj.length)
+    console.log(vipArray.length + regularArray.length)
 
-    for (const element of vipObj) {
+    for (const element of vipArray) {
         console.log(element)
     }
 
-    for (const element of regularObj) {
+    for (const element of regularArray) {
         console.log(element)
     }
 }

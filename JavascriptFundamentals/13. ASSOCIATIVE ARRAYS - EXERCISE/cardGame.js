@@ -8,7 +8,7 @@ function solve(input) {
         let power = 0
         let multiplier = 0
         let multiplierNumber = 0
-
+        
         if (!points[name]) {
             points[name] = 0
         }
@@ -75,14 +75,15 @@ function solve(input) {
                 score = power * multiplierNumber
             }
 
-            points[name] += score
+           points[name] += score
 
             addUsedCard(card, name)
             removeDuplicateCards(name)
+            // реално махането на дубликатите не е нужно, понеже по-горе проверявам дали картата вече е използвана, но така и така го написах...
         }
     }
 
-    Object.entries(points).forEach(x => console.log(x[0] + ": " + x[1]))
+Object.entries(points).forEach(x => console.log(x[0] + ": " + x[1]))
 
     function addUsedCard(card, name) {
 
@@ -99,6 +100,8 @@ function solve(input) {
             x = x.split(' ')
 
             player[name] = x
+
+            // тук можеше просто player[name].push(card)
         }
     }
 
@@ -108,7 +111,7 @@ function solve(input) {
             let array = []
             set.forEach(x => array.push(x))
             player[name] = array
-        }
+        } 
     }
 }
 
