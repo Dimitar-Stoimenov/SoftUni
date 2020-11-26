@@ -4,12 +4,12 @@ function solve(input) {
 
     for (let line of input) {
         if (line === 'End') {
-            let sortedCities = Object.entries(cities)
+            let citiesArr = Object.entries(cities)
 
-            if (sortedCities.length < 1) {
+            if (citiesArr.length < 1) {
                 console.log(`Ahoy, Captain! All targets have been plundered and destroyed!`)
             } else {
-                sortedCities.sort((a, b) => {
+                citiesArr.sort((a, b) => {
                     if (a[1].gold === b[1].gold) {
                         return a[0].localeCompare(b[0])
                     } else {
@@ -17,9 +17,9 @@ function solve(input) {
                     }
                 })
 
-                console.log(`Ahoy, Captain! There are ${sortedCities.length} wealthy settlements to go to:`)
+                console.log(`Ahoy, Captain! There are ${citiesArr.length} wealthy settlements to go to:`)
 
-                for (let city of sortedCities) {
+                for (let city of citiesArr) {
                     console.log(`${city[0]} -> Population: ${city[1].population} citizens, Gold: ${city[1].gold} kg`)
                 }
             }
