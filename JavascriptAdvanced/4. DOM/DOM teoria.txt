@@ -1,0 +1,34 @@
+'there are a few ways to find a certain HTML element in the DOM:'
+- 'by ID' - getElementByID();
+- 'by tag name' - getElementsByTag();
+- 'by class name' - getElementsByClassName();
+- 'by CSS selector' - querySelector();
+
+'.innerHTML взима нещо, което се намира вътре в HTML-а'
+let ulElement = document.querySelector('ul')
+ulElement.innerHTML += '<li> Newly added!</li>'
+'document означава в момента заредения HTML документ'
+
+'.attributes може да се достъпват като обект, примерно:'
+ulElement.attributes.id
+
+'.setAttribute() - примерно:'
+ulElement.setAttribute('data-name', 'Pesho');
+
+'.style - може да се променят CSS пропъртитата динамично:'
+liElement.style.backgroundColor = 'pink'
+liElement.style.color = 'white'
+
+'.removeChild() - изтрива child от ДОМ дървото:'
+parentElement.removeChild(childElement)
+'но изтрития child не спира да съществува! има го в памета и може да се извика, просто вече не е вързано към DOM дървото'
+
+'може да се добави отното с .appendChild() и дори евентуално да му се добави нещо:'
+childElement.innerHTML += ' + added content'
+parentElement.appendChild(childElement)
+
+'.replaceChild() - може да се сменя child елемент по следния начин:'
+parentElement.replaceChild(newChild, oldChild)
+
+'document.write дописва накрая на документа:'
+document.write('Pisha si kot si iskam')
