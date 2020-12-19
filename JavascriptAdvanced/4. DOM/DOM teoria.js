@@ -39,3 +39,10 @@ let p = document.createElement("p")
 'клониране на ДОМ елементс .cloneNode(), като ако искаме да включим и елементите във него се слага true в скобите - .cloneNode(true)'
 let newLiElement = liElement.cloneNode()
 'и после можем да го добавим с .appendChild()'
+
+'премахване на child от дом дървото:'
+firstChild.remove()
+'или'
+parent.removeChild(firstChild)
+'не го трият директно - може да се закачи обратно с appendChild()'
+

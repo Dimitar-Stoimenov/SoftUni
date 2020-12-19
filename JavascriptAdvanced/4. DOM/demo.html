@@ -6,12 +6,12 @@
         
         <h1 id="heading">Intro to DOM</h1>
         <ul>
-            <li id="methods-list-item" class="list-item" data-name="Ivaylo">DOM Methods</li>
+            <li id="methods-list-item" class="list-item" data-name="dom-method-selector">DOM Methods</li>
             <li class="list-item">DOM Properties</li>
         </ul>
 
         <script>
-            let liElement = document.querySelector('#methods-list-item')
+            let liElement = document.querySelector('#methods-list-item')    
             liElement.setAttribute('data-name', 'Pesho')
             console.log(liElement.attributes);
             liElement.style.backgroundColor = 'pink'
@@ -42,6 +42,9 @@
             copiedLiElement.innerHTML += '/this is a copy with black Letters/'
             //клониране на елемент
 
+            liElement.remove()
+            //премахване на елемент от ДОМ дървото - не го трие тотално, просто го откача от дървото, на долния ред го връщаме обратно
+            parentElement.appendChild(liElement)            
 
         </script>
     </body>
