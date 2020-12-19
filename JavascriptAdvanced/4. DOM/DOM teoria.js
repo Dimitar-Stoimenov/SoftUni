@@ -13,7 +13,7 @@ ulElement.innerHTML += '<li> Newly added!</li>'
 ulElement.attributes.id
 
 '.setAttribute() - примерно:'
-ulElement.setAttribute('data-name', 'Pesho');
+ulElement.setAttribute('id', 'Pesho');
 
 '.style - може да се променят CSS пропъртитата динамично:'
 liElement.style.backgroundColor = 'pink'
@@ -32,3 +32,10 @@ parentElement.replaceChild(newChild, oldChild)
 
 'document.write дописва накрая на документа:'
 document.write('Pisha si kot si iskam')
+
+'document.createElement("p") - създаване на ДОМ елемент с таг "p". той не е в ДОМ дървото, но може да бъде присъединен с .appendChild()'
+let p = document.createElement("p")
+
+'клониране на ДОМ елементс .cloneNode(), като ако искаме да включим и елементите във него се слага true в скобите - .cloneNode(true)'
+let newLiElement = liElement.cloneNode()
+'и после можем да го добавим с .appendChild()'

@@ -28,6 +28,21 @@
 
             document.write('Pisha si kot si iskam')
             //дописване накрая на документа
+
+            let newLiElement = document.createElement("li")
+            newLiElement.textContent = 'newly created list item'
+            //textContect е почти същото като .innerHTML
+
+            parentElement.appendChild(newLiElement)
+            //добавям новия елемент към парента
+
+            let copiedLiElement = liElement.cloneNode(true)
+            parentElement.appendChild(copiedLiElement)
+            copiedLiElement.style.color = 'black'
+            copiedLiElement.innerHTML += '/this is a copy with black Letters/'
+            //клониране на елемент
+
+
         </script>
     </body>
 </html>
