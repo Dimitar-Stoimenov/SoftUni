@@ -1,5 +1,10 @@
 <html>
     <head>
+        <style>
+            .selected {
+                background-color: green;
+            }
+        </style>
         <title>My first page</title>
     </head>
     <body>
@@ -44,7 +49,10 @@
 
             liElement.remove()
             //премахване на елемент от ДОМ дървото - не го трие тотално, просто го откача от дървото, на долния ред го връщаме обратно
-            parentElement.appendChild(liElement)            
+            parentElement.appendChild(liElement)          
+            
+            newLiElement.classList.add('selected')
+            //добавям клас "selected" на елемента newLiElement, а по-нагоре съм добавил CSS - ЗЕЛЕН бекграунд на всички елементи с клас "selected"
 
         </script>
     </body>

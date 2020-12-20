@@ -46,3 +46,11 @@ firstChild.remove()
 parent.removeChild(firstChild)
 'не го трият директно - може да се закачи обратно с appendChild()'
 
+.setAttributes()
+.removeAttributes()
+.hasAttributes()
+
+'.classList - за манипулации на класовете на елемента:'
+'има .add() .remove()'
+liElement.classList.add('selected')
+'това добави нов клас на елемента с име "selected"'
