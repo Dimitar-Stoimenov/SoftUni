@@ -10,7 +10,7 @@
     <body>
         
         <h1 id="heading">Intro to DOM</h1>
-        <ul>
+        <ul onclick="onListClick()" style="cursor: pointer">
             <li id="methods-list-item" class="list-item" data-name="dom-method-selector">DOM Methods</li>
             <li class="list-item">DOM Properties</li>
         </ul>
@@ -18,10 +18,8 @@
         <script>
             let liElement = document.querySelector('#methods-list-item')    
             liElement.setAttribute('data-name', 'Pesho')
-            console.log(liElement.attributes);
             liElement.style.backgroundColor = 'pink'
             liElement.style.color = 'white'
-            console.log(liElement.style);
 
             let parentElement = document.querySelector('ul')
             let childElement = document.getElementById('methods-list-item')
@@ -52,7 +50,39 @@
             parentElement.appendChild(liElement)          
             
             newLiElement.classList.add('selected')
-            //добавям клас "selected" на елемента newLiElement, а по-нагоре съм добавил CSS - ЗЕЛЕН бекграунд на всички елементи с клас "selected"
+            //добавям клас "selected" на елемента newLiElement, а по-нагоре в тага <style> съм добавил CSS - ЗЕЛЕН бекграунд на всички елементи с клас "selected"
+
+            let parentEl = liElement.parentElement;
+
+            let x = parentEl.appendChild(liElement.cloneNode(true))
+            x.style.color = 'white'
+            x.style.backgroundColor = "purple"
+            //малко комбо
+
+            parentElement.lastElementChild.innerHTML = 'DOM дърво'
+            //промених последния чайлд - само текста му, горе пропертитата му останаха същите
+            parentElement.lastElementChild.style.color = 'yellow'
+
+            //сега примерно взимаме предния на този горе и му променям цвета
+            parentElement.lastElementChild.previousElementSibling.style.backgroundColor = 'red'
+            //може и да се нества
+            parentElement.lastElementChild.previousElementSibling.previousElementSibling.style.backgroundColor = 'lightgreen'
+
+            //добавям нов ред най-отпред и му добавям разни щуротии:
+            let newLine = document.createElement('li')
+            newLine.setAttribute('id', 'prependedLi')
+            newLine.textContent = 'prepended line of text with LI tag'
+            parentElement.prepend(newLine)            
+
+            // добавих onclick пропърти на 'ul' тага с фукцията по-долу, която ще върти елементите
+            function onListClick() {
+                let ulElement = document.getElementsByTagName('ul')[0]
+                let lastElement = ulElement.lastElementChild
+
+                ulElement.prepend(lastElement)
+            }
+
+            console.log(screen);
 
         </script>
     </body>

@@ -23,9 +23,11 @@ liElement.style.color = 'white'
 parentElement.removeChild(childElement)
 'но изтрития child не спира да съществува! има го в памета и може да се извика, просто вече не е вързано към DOM дървото'
 
-'може да се добави отното с .appendChild() и дори евентуално да му се добави нещо:'
+'може да се добави отново с .appendChild() и дори евентуално да му се добави нещо:'
 childElement.innerHTML += ' + added content'
 parentElement.appendChild(childElement)
+'appendChild(), добавя най-отзад, .prepend() може да добави най-отпред'
+'реално appendChild() и prepend() могат да разместят различните неща, ако се сложат вътре в тях директно'
 
 '.replaceChild() - може да се сменя child елемент по следния начин:'
 parentElement.replaceChild(newChild, oldChild)
@@ -54,3 +56,19 @@ parent.removeChild(firstChild)
 'има .add() .remove()'
 liElement.classList.add('selected')
 'това добави нов клас на елемента с име "selected"'
+
+'можем да взимаме парент елемента от чайлда му:'
+let parentEl = liElement.parentElement;
+
+'също може да взимаме чайлд от парента:'
+parentElement.children
+'връща списък (масив) с всички деца'
+'може да взимаме и първия или последния чайлд със следните команди:'
+.firstElementChild
+.lastElementChild
+
+'може да взимаме следващ или предишен sibling:'
+.nextElementSibling
+.previousElementSibling
+'тези могат да се нестват един в друг, примерно:'
+.nextElementSibling.nextElementSibling.nextElementSibling
