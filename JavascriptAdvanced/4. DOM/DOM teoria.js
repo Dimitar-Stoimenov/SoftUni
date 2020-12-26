@@ -72,3 +72,12 @@ parentElement.children
 .previousElementSibling
 'тези могат да се нестват един в друг, примерно:'
 .nextElementSibling.nextElementSibling.nextElementSibling
+
+'сет интервал на който да се изпълнява определена фунцкяи и спирането и:'
+let intervalId = setInterval(() => {
+    counter++
+    buttonElement.click() //това е хванатия елемент, който кликаме
+    if (counter > 5) {
+        clearInterval(intervalId)
+    }
+}, 4000)
