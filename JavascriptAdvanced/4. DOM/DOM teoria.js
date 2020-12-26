@@ -81,3 +81,18 @@ let intervalId = setInterval(() => {
         clearInterval(intervalId)
     }
 }, 4000)
+
+'пример за адване на eventListener на един parent, вместо на всеки child поотделно'
+'по този начин се адва само един event listener, за оптимизиране'
+parentElement.addEventListener('click', onListItemClick);
+function onListItemClick(e) {
+    if (e.target.tagName === 'LI') {
+        let paddingValue = parseInt(e.target.style.paddingLeft) || 0;
+
+        paddingValue += 3
+
+        e.target.style.paddingLeft = paddingValue + 'px'
+    }
+}
+
+'.target и .currentTarget са различни - current e този, върху който е зададен евента (обикновено е парент) - таргет е този, който е натиснат'
