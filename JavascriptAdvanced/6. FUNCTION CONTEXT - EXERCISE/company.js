@@ -15,7 +15,6 @@ class Company {
         }
 
         return `New employee is hired. Name: ${username}. Position: ${position}`;
-
     }
 
     bestDepartment() {
@@ -30,7 +29,6 @@ class Company {
 
             depPeopleArray.forEach(employeeObj => {
                 depTotalSalary += employeeObj.salary
-
             })
 
             let depAvgSalary = depTotalSalary / depPeopleArray.length
@@ -54,7 +52,6 @@ class Company {
         })
 
         return output.trim();
-
     }
 
     validate(value) {
