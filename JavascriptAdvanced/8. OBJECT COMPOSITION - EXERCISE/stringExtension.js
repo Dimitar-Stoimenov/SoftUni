@@ -49,6 +49,7 @@
         } else if (lastFoundSpaceIndex > n - 3) {
             let newWord = this.toString().substr(0, n);
             lastFoundSpaceIndex = newWord.lastIndexOf(' ');
+
             if (lastFoundSpaceIndex < 0) {
                 return newWord.substr(0, n - 3) + '...';
             } else if (lastFoundSpaceIndex > n - 3) {
