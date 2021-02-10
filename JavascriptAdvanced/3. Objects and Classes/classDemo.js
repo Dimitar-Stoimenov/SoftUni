@@ -1,7 +1,6 @@
 class Person {
     #currentAge = 0; // сетвам дефолтна стойност, ако аргументът не влиза в стойностите подадени на сетъра по-долу
 
-
     static type = 'Homo Sapiens'
 
     constructor(firstName, lastName, age, hairColor = 'brown') {
