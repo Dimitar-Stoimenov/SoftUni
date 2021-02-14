@@ -1,4 +1,4 @@
-function createComputerHierarchy() {
+function solve() {
     class Keyboard {
         constructor(manufacturer, responseTime) {
             this.manufacturer = manufacturer;
@@ -47,11 +47,45 @@ function createComputerHierarchy() {
         }
 
         set battery(battery) {
+            if (battery.constructor.name != 'Battery') {
+                throw new TypeError('error')
+            }
+
             this._battery = battery;
         }
     }
 
+    class Desktop extends Computer {
+        constructor(manufacturer, processorSpeed, ram, hardDiskSpace, keyboard, monitor) {
+            super(manufacturer, processorSpeed, ram, hardDiskSpace);
+            this.keyboard = keyboard;
+            this.monitor = monitor;
+        }
 
+        get keyboard() {
+            return this._keyboard;
+        }
+
+        set keyboard(keyboard) {
+            if (keyboard.constructor.name != 'Keyboard') {
+                throw new TypeError('error')
+            }
+
+            this._keyboard = keyboard;
+        }
+
+        get monitor() {
+            return this._monitor;
+        }
+
+        set monitor(monitor) {
+            if (monitor.constructor.name != 'Monitor') {
+                throw new TypeError('error')
+            }
+
+            this._monitor = monitor;
+        }
+    }
 
     return {
         Battery,
@@ -59,6 +93,12 @@ function createComputerHierarchy() {
         Monitor,
         Computer,
         Laptop,
-        // Desktop
+        Desktop
     }
 }
+
+let app = solve()
+let monitor = new app.Monitor('Benq', 100, 40);
+let keyboard = new app.Keyboard('Razer', 0.01);
+let desktop = new app.Desktop('Acer', 4.5, 32, 2000, keyboard, monitor);
+console.log(desktop);
