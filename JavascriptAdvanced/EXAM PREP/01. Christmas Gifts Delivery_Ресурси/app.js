@@ -50,7 +50,7 @@ function solution() {
         listOfGiftsUlElement.appendChild(listOfGiftsLiElement);
 
         [...listOfGiftsUlElement.children]
-            .sort((a, b) => a.textContent.localeCompare(b.textContent))
+            .sort((a, b) => a.innerText.localeCompare(b.innerText))
             .forEach(node => listOfGiftsUlElement.appendChild(node));
 
         addGiftElement.value = ""
