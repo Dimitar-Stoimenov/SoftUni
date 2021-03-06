@@ -1,3 +1,19 @@
+function sum(a, b) {
+    return Number(a) + Number(b);
+}
+
+function product(a, b) {
+    return a * b
+}
+
+module.exports = {
+    sum,
+    product
+};
+
+// с module.exports експортираме файла;
+// с require го викаме;
+
 const { sum } = require('./myModule.js');
 console.log(sum(4, 4));
 
