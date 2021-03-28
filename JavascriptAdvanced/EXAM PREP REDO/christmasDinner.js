@@ -21,8 +21,8 @@ class ChristmasDinner {
     shopping(product) {
         let [typeOfProduct, price] = product;
 
-        if (this.budget < price) {
-            throw new Error(`Not enough money to buy this product`);
+        if (price > this.budget) {
+            throw new Error("Not enough money to buy this product");
         }
 
         this.products.push(typeOfProduct);
@@ -33,27 +33,27 @@ class ChristmasDinner {
     recipes(recipe) {
         let productsMark = true;
 
-        recipe.productsList.forEach(x => {
-            if (!this.products.includes(x)) {
+        recipe.productsList.forEach(prod => {
+            if (!this.products.includes(prod)) {
                 productsMark = false;
             }
         })
 
-        if (productsMark) {
-            this.dishes.push(recipe);
-            return `${recipe.recipeName} has been successfully cooked!`
-        } else {
-            throw new Error("We do not have this product")
+        if (!productsMark) {
+            throw new Error("We do not have this product");
         }
+
+        this.dishes.push(recipe);
+        return `${recipe.recipeName} has been successfully cooked!`
     }
 
     inviteGuests(name, dish) {
         if (!this.dishes.find(x => x.recipeName === dish)) {
-            throw new Error("We do not have this dish")
+            throw new Error('We do not have this dish');
         }
 
         if (this.guests[name]) {
-            throw new Error("This guest has already been invited")
+            throw new Error('This guest has already been invited');
         }
 
         this.guests[name] = dish;
@@ -65,26 +65,16 @@ class ChristmasDinner {
 
         for (const name in this.guests) {
             let dish = this.guests[name];
-            
             let products = this.dishes.find(x => x.recipeName === dish).productsList.join(', ');
 
             resultArr.push(`${name} will eat ${dish}, which consists of ${products}`);
         }
 
-        // this.guests.forEach(guest => {
-        //     let name = Object.keys(guest)[0];
-        //     let dish = Object.values(guest)[0];
-
-        //     let products = this.dishes.find(x => x.recipeName === dish).productsList.join(', ')
-           
-        //     resultArr.push(`${name} will eat ${dish}, which consists of ${products}`);
-        // })     
-
         return resultArr.join('\n')
     }
 }
 
-let dinner = new ChristmasDinner(150);
+let dinner = new ChristmasDinner(300);
 
 dinner.shopping(['Salt', 1]);
 dinner.shopping(['Beans', 3]);
@@ -97,7 +87,7 @@ dinner.shopping(['Honey', 10]);
 
 dinner.recipes({
     recipeName: 'Oshav',
-    productsList: ['Rice', 'Honey', 'Peppers']
+    productsList: ['Fruits', 'Honey']
 });
 dinner.recipes({
     recipeName: 'Folded cabbage leaves filled with rice',
@@ -108,8 +98,8 @@ dinner.recipes({
     productsList: ['Beans', 'Peppers', 'Salt']
 });
 
-dinner.inviteGuests('Ivan', 'Folded cabbage leaves filled with rice');
-console.log(dinner.inviteGuests('Ivanka', 'Peppers filled with beans'));
+dinner.inviteGuests('Ivan', 'Oshav');
+dinner.inviteGuests('Petar', 'Folded cabbage leaves filled with rice');
+dinner.inviteGuests('Georgi', 'Peppers filled with beans');
 
 console.log(dinner.showAttendance());
-
