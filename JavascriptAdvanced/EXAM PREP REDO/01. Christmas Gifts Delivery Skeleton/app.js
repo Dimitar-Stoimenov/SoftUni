@@ -11,10 +11,10 @@ function solution() {
 
         const element = e('li', name, 'gift');
         const sendBtn = e('button', 'Send', 'sendButton');
-        const discardbtn = e('button', 'Discard', 'discardButton');
+        const discardBtn = e('button', 'Discard', 'discardButton');
 
         element.appendChild(sendBtn);
-        element.appendChild(discardbtn);
+        element.appendChild(discardBtn);
 
         gifts.appendChild(element);
 
@@ -25,28 +25,28 @@ function solution() {
     }
 
     // logic for sending gifts
-    // function sendGift(name, gift) {
-    //     gift.remove();
-    //     const element = e('li', name, 'gift');
-    //     sent.appendChild(element);
-    //     // remove element from original list
-    //     // create new list item
-    //     // add element to new list
-    // }
+    function sendGift(name, gift) {
+        gift.remove();
+        const element = e('li', name, 'gift');
+        sent.appendChild(element);
+        // remove element from original list
+        // create new list item
+        // add element to new list
+    }
 
     // logic for discarding gifts
-    // function discardGift(name, gift) {
-    //     gift.remove();
-    //     const element = e('li', name, 'gift');
-    //     discarded.appendChild(element);
-    // }
+    function discardGift(name, gift) {
+        gift.remove();
+        const element = e('li', name, 'gift');
+        discarded.appendChild(element);
+    }
 
     // sort gift list
     function sortGifts() {
         Array
             .from(gifts.children)
-            .sort((a, b) => a.innerText.localeCompare(b.innerText))
-            .forEach(g => gifts.appendChild(g))
+            .sort((a, b) => a.childNodes[0].textContent.localeCompare(b.childNodes[0].textContent))
+            .forEach(g => gifts.appendChild(g));
     }
 
     function e(type, content, className) {
