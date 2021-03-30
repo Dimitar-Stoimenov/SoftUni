@@ -9,7 +9,6 @@ class Parking {
             throw new Error('Not enough parking space.')
         }
 
-
         this.vehicles.push({ carModel, carNumber, payed: false })
         this.capacity--
 
