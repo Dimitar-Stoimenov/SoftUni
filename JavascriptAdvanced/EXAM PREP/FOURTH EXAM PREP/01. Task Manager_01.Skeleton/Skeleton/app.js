@@ -8,15 +8,13 @@ function solve() {
     addButton.addEventListener('click', (e) => {
         e.preventDefault();
 
-        let validityCheck = taskInputElement.value != '' && descriptionElement.value != '' && dateElement.value != '';
+        let datePattern = /[0-9]{4}.[0-1][0-9].[0-3][0-9]/g
+
+        let validityCheck = taskInputElement.value != '' && descriptionElement.value != '' && datePattern.test(dateElement.value);
 
         if (validityCheck) {
             addTask(taskInputElement.value, descriptionElement.value, dateElement.value);
         };
-
-        taskInputElement.value = '';
-        descriptionElement.value = '';
-        dateElement.value = '';
     })
 
     function addTask(task, desc, date) {
@@ -42,22 +40,22 @@ function solve() {
         deleteButton.classList = 'red';
         buttonDivEl.appendChild(startButton);
         buttonDivEl.appendChild(deleteButton);
-        
+
         articleElement.appendChild(buttonDivEl);
-        
+
         sectionsList[1].appendChild(articleElement);
-        
+
         deleteButton.addEventListener('click', () => {
             articleElement.remove();
         });
-        
+
         startButton.addEventListener('click', () => {
             articleElement.remove();
             let inProgress = document.getElementById('in-progress');
             inProgress.textContent = '';
             deleteButton.remove();
             startButton.remove();
-            
+
             let newDeleteButton = document.createElement('button');
             newDeleteButton.textContent = 'Delete';
             newDeleteButton.classList = 'red';
@@ -66,11 +64,11 @@ function solve() {
             finishButton.classList = 'orange';
             buttonDivEl.appendChild(newDeleteButton);
             buttonDivEl.appendChild(finishButton);
-            
+
             newDeleteButton.addEventListener('click', () => {
                 articleElement.remove();
             });
-            
+
             finishButton.addEventListener('click', () => {
                 let complete = document.querySelector('body > main > div > section:nth-child(4) > div:nth-child(2)');
                 complete.textContent = '';
