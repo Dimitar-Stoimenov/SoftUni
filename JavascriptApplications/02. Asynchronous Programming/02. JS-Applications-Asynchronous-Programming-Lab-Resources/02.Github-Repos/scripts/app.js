@@ -5,8 +5,18 @@ function loadRepos() {
 
 
 	fetch(url)
-		.then(response => response.json())
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Request error');
+			};
+
+			console.log(response);
+			response.json();
+		})
 		.then(data => {
+			console.log(`Promise fulfilled`);
+			console.log(data);
+
 			const ulElement = document.getElementById('repos');
 			ulElement.innerHTML = "";
 
@@ -15,5 +25,9 @@ function loadRepos() {
 				liElement.textContent = r.full_name;
 				ulElement.appendChild(liElement);
 			});
+		})
+		.catch(error => {
+			console.log(`Promise rejected`);
+			console.log(error);
 		});
 }
