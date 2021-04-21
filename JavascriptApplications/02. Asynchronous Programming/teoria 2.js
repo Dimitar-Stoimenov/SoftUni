@@ -3,6 +3,7 @@ function loadRepos() {
 
 	const url = `https://api.github.com/users/${username}/repos`;
 
+
 	fetch(url)
 		.then(response => {
 			if (!response.ok) {
@@ -10,7 +11,7 @@ function loadRepos() {
 			};
 
 			console.log(response);
-			return response.json();
+			response.json();
 		})
 		.then(data => {
 			console.log(`Promise fulfilled`);
