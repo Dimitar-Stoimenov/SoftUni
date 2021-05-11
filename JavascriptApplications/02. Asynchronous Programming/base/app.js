@@ -53,9 +53,12 @@ async function getRecipeDetails(id, preview) {
     const data = await recipeResponse.json();
 
     const article = document.createElement('article');
-    
+
     const titleh2Element = document.createElement('h2');
     titleh2Element.textContent = data.name;
+    titleh2Element.addEventListener('click', () => {
+        article.replaceWith(preview);
+    })
 
     const bandElement = document.createElement('div');
     bandElement.classList = 'band';
