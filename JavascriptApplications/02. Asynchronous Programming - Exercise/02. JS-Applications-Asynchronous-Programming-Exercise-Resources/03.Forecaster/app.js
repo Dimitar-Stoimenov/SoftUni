@@ -1,9 +1,13 @@
+const forecastDivElement = document.getElementById('forecast');
+
 function attachEvents() {
     const submitBtn = document.getElementById('submit');
     submitBtn.addEventListener('click', async () => {
+        forecastDivElement.style.display = 'none';
+
         const location = document.getElementById('location').value;
         const weatherInfo = await getWeather();
-        const result = Object.values(weatherInfo).find(loc => loc.name == location);
+        const result = Object.values(weatherInfo).find(loc => loc.name.toLowerCase() == location.toLowerCase());
 
         try {
             const locationCode = result.code;
@@ -42,7 +46,6 @@ async function getForecast(code) {
 function insertWeatherInfoIntoDom(currentWeather, forecastWeather) {
     const { name: locationName, forecast: { low: currentLow, high: currentHigh, condition: currentCondition } } = currentWeather;
 
-    const forecastDivElement = document.getElementById('forecast');
     forecastDivElement.style.display = 'block';
 
     const currentWeatherDivElement = document.getElementById('current');
