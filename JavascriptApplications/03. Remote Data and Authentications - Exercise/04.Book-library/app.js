@@ -16,21 +16,22 @@ async function getAllBooks() {
 
     const rows = Object.entries(books).map(createRow).join('');
     document.querySelector('tbody').innerHTML = rows;
+
+    function createRow([id, book]) {
+        const result = `
+        <tr data-id="${id}">
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>
+                <button class="editBtn">Edit</button>
+                <button class="deleteBtn">Delete</button>
+            </td>
+        </tr>`;
+
+        return result;
+    }
 }
 
-function createRow([id, book]) {
-    const result = `
-    <tr data-id="${id}">
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-        <td>
-            <button class="editBtn">Edit</button>
-            <button class="deleteBtn">Delete</button>
-        </td>
-    </tr>`;
-
-    return result;
-}
 
 async function createBook(event) {
     event.preventDefault();
@@ -80,6 +81,12 @@ function start() {
     document.getElementById('loadBooks').addEventListener('click', getAllBooks);
     document.getElementById('createForm').addEventListener('submit', createBook);
     document.getElementById('editForm').addEventListener('submit', updateBook);
+    document.querySelector('#editForm [type="button"]').addEventListener('click', (event) => {
+        document.getElementById('createForm').style.display = 'block';
+        document.getElementById('editForm').style.display = 'none';
+        // event.target.reset();
+    });
+
     document.querySelector('table').addEventListener('click', handleTableClick);
 
     getAllBooks();
@@ -95,9 +102,13 @@ function handleTableClick(event) {
         const bookId = event.target.parentNode.parentNode.dataset.id;
         loadBookForEditting(bookId);
     } else if (event.target.className == 'deleteBtn') {
-        const bookId = event.target.parentNode.parentNode.dataset.id;
-        deleteBook(bookId);
-    }
+        const confirmed = confirm('Are you sure you want to delete this book?');
+
+        if (confirmed) {
+            const bookId = event.target.parentNode.parentNode.dataset.id;
+            deleteBook(bookId);
+        };
+    };
 }
 
 async function loadBookForEditting(id) {
