@@ -3,6 +3,10 @@
     font-size: 20px;
 }
 
+#editForm{
+    display: none;
+}
+
 table{
     border:1px solid #234465;
     padding: 1%;
