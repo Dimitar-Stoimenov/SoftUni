@@ -51,5 +51,6 @@ async function createStudent(event) {
         body: JSON.stringify({ firstName, lastName, facultyNumber, grade })
     });
 
+    formEl.reset();
     displayStudents();
 }
