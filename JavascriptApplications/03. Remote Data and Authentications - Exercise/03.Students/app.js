@@ -45,7 +45,7 @@ async function createStudent(event) {
     const grade = formData.get('grade');
 
     const url = 'http://localhost:3030/jsonstore/collections/students';
-    const response = await fetch(url, {
+    await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'json/application' },
         body: JSON.stringify({ firstName, lastName, facultyNumber, grade })
