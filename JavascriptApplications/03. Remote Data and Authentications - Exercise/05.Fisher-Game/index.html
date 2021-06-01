@@ -15,7 +15,7 @@
         <nav>
             <a class="active">Home</a>
             <div id="guest">
-                <a href="login.html">Login</a>
+                <a id="loginBtn" href="login.html">Login</a>
             </div>
         </nav>
     </header>
@@ -70,8 +70,8 @@
             </div>
         </fieldset>
         <aside>
-            <button class="load">Load</button>
-            <fieldset id="addForm">
+            <button id="loadBtn" class="load">Load</button>
+            <fieldset id="fieldset">
                 <legend>Add Catch</legend>
                 <label>Angler</label>
                 <input type="text" class="angler" />
@@ -85,7 +85,7 @@
                 <input type="text" class="bait" />
                 <label>Capture Time</label>
                 <input type="number" class="captureTime" />
-                <button disabled class="add">Add</button>
+                <button id="addBtn" disabled class="add">Add</button>
             </fieldset>
         </aside>
     </main>
