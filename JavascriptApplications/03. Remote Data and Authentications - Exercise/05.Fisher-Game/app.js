@@ -1,8 +1,13 @@
 const catchesDiv = document.getElementById('catches');
-const token = sessionStorage.getItem('userToken');
 
 window.addEventListener('load', () => {
     document.getElementById('loadBtn').addEventListener('click', loadAllCatches);
+
+    loadAllCatches();
+})
+
+function checkForLoginData() {
+    const token = sessionStorage.getItem('userToken');
 
     if (token != null) {
         document.getElementById('loginBtn').style.display = 'none';
@@ -12,19 +17,22 @@ window.addEventListener('load', () => {
         document.getElementById('loginBtn').style.display = 'block';
         document.getElementById('addBtn').disabled = true;
     };
-
-    loadAllCatches();
-})
+}
 
 async function submitNewCatch() {
     const token = sessionStorage.getItem('userToken');
+    const fieldSetElement = document.getElementById('fieldset');
 
-    const angler = document.getElementById('fieldset').children[2].value;
-    const weight = document.getElementById('fieldset').children[4].value;
-    const species = document.getElementById('fieldset').children[6].value;
-    const location = document.getElementById('fieldset').children[8].value;
-    const bait = document.getElementById('fieldset').children[10].value;
-    const captureTime = document.getElementById('fieldset').children[12].value;
+    const angler = fieldSetElement.children[2].value;
+    const weight = fieldSetElement.children[4].value;
+    const species = fieldSetElement.children[6].value;
+    const location = fieldSetElement.children[8].value;
+    const bait = fieldSetElement.children[10].value;
+    const captureTime = fieldSetElement.children[12].value;
+
+    if (angler == '' || weight == '' || species == '' || location == '' || bait == '' || captureTime == '') {
+        return alert('All fields are required!');
+    }
 
     const url = 'http://localhost:3030/data/catches';
     const response = await fetch(url, {
@@ -42,6 +50,8 @@ async function submitNewCatch() {
 }
 
 async function loadAllCatches() {
+    checkForLoginData();
+
     const url = 'http://localhost:3030/data/catches';
     const response = await fetch(url);
 
@@ -56,7 +66,6 @@ async function loadAllCatches() {
     data.forEach(displayCatch);
     document.querySelectorAll('.delete').forEach(el => el.addEventListener('click', deleteCatch));
     document.querySelectorAll('.update').forEach(el => el.addEventListener('click', updateCatch));
-
 }
 
 function displayCatch(data) {
@@ -94,8 +103,15 @@ function displayCatch(data) {
 }
 
 async function deleteCatch(event) {
+    const token = sessionStorage.getItem('userToken');
     const id = event.target.parentNode.id;
     const url = 'http://localhost:3030/data/catches/' + id;
+    const confirmed = confirm('Are you sure you want to delete this catch?');
+
+    if (!confirmed) {
+        return;
+    }
+
     const response = await fetch(url, {
         method: 'DELETE',
         headers: { 'Content-Type': 'json/application', 'X-Authorization': token },
@@ -110,21 +126,27 @@ async function deleteCatch(event) {
 }
 
 async function updateCatch(event) {
+    const token = sessionStorage.getItem('userToken');
     const id = event.target.parentNode.id;
     const url = 'http://localhost:3030/data/catches/' + id;
-    // const response = await fetch(url, {
-    //     method: 'PUT',
-    //     headers: { 'Content-Type': 'json/application', 'X-Authorization': token },
-    //     body: JSON.stringify({}),
-    // });
+    const divEl = document.getElementById(id);
+    const angler = divEl.children[1].value;
+    const weight = divEl.children[4].value;
+    const species = divEl.children[7].value;
+    const location = divEl.children[10].value;
+    const bait = divEl.children[13].value;
+    const captureTime = divEl.children[16].value;
 
-    console.log(event.target.parentNode);
-    // get each input and update the server;
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'json/application', 'X-Authorization': token },
+        body: JSON.stringify({ angler, weight, species, location, bait, captureTime }),
+    });
 
-    // if (!response.ok) {
-    //     const error = await response.json();
-    //     return alert(error.message);
-    // }
+    if (!response.ok) {
+        const error = await response.json();
+        return alert(error.message);
+    }
 
     loadAllCatches();
 }
