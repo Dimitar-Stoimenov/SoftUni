@@ -6,6 +6,7 @@
     <title>My Cookbook</title>
     <link rel="stylesheet" href="static/site.css">
     <link rel="stylesheet" href="static/recipe.css">
+    <link rel="stylesheet" href="static/form.css">
     <script type="module" src="/src/app.js"></script>
 </head>
 
@@ -13,20 +14,20 @@
     <header>
         <h1>My Cookbook</h1>
         <nav>
-            <a class="active">Catalog</a>
+            <a id="catalogLink" href="index.html" class="active">Catalog</a>
             <div id="user">
-                <a href="create.html">Create Recipe</a>
+                <a id="createLink" href="create.html">Create Recipe</a>
                 <a id="logoutBtn" href="javascript:void(0)">Logout</a>
             </div>
             <div id="guest">
-                <a href="login.html">Login</a>
-                <a href="register.html">Register</a>
+                <a id="loginLink" href="login.html">Login</a>
+                <a id="registerLink" href="register.html">Register</a>
             </div>
         </nav>
     </header>
     <main>
     </main>
-    
+
     <div id="views">
         <section id="catalogSection">
             <p style="color: white">Loading...</p>
@@ -61,8 +62,10 @@
                 <form>
                     <label>Name: <input type="text" name="name" placeholder="Recipe name"></label>
                     <label>Image: <input type="text" name="img" placeholder="Image URL"></label>
-                    <label class="ml">Ingredients: <textarea name="ingredients" placeholder="Enter ingredients on separate lines"></textarea></label>
-                    <label class="ml">Preparation: <textarea name="steps" placeholder="Enter preparation steps on separate lines"></textarea></label>
+                    <label class="ml">Ingredients: <textarea name="ingredients"
+                            placeholder="Enter ingredients on separate lines"></textarea></label>
+                    <label class="ml">Preparation: <textarea name="steps"
+                            placeholder="Enter preparation steps on separate lines"></textarea></label>
                     <input type="submit" value="Create Recipe">
                 </form>
             </article>

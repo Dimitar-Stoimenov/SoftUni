@@ -1,6 +1,6 @@
 import { e } from './dom.js';
 
-export async function getRecipes() {
+async function getRecipes() {
     const response = await fetch('http://localhost:3030/data/recipes');
     const recipes = await response.json();
 
@@ -14,7 +14,7 @@ async function getRecipeById(id) {
     return recipe;
 }
 
-export function createRecipePreview(recipe) {
+function createRecipePreview(recipe) {
     const result = e('article', { className: 'preview', onClick: toggleCard },
         e('div', { className: 'title' }, e('h2', {}, recipe.name)),
         e('div', { className: 'small' }, e('img', { src: recipe.img })),
@@ -46,4 +46,27 @@ function createRecipeCard(recipe) {
     );
 
     return result;
+}
+
+let main;
+let section;
+
+export function setupCatalog(mainTarget, sectionTarget) {
+    main = mainTarget;
+    section = sectionTarget;
+}
+
+export async function showCatalog() {
+    section.innerHTML = '<p style="color: white">Loading...</p>';
+    main.innerHTML = '';
+    main.appendChild(section);
+
+    const recipes = await getRecipes();
+    const cards = recipes.map(createRecipePreview);
+
+    const fragment = document.createDocumentFragment();
+    cards.forEach(c => fragment.appendChild(c));
+    
+    section.innerHTML = '';
+    section.appendChild(fragment);
 }
