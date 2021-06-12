@@ -3,7 +3,6 @@ import { setupLogin, showLogin } from './login.js';
 import { setupRegister, showRegister } from './register.js';
 import { setupCreate, showCreate } from './create.js';
 
-
 main();
 
 function main() {
@@ -23,10 +22,10 @@ function main() {
         'createLink': showCreate,
     };
 
-    setupCatalog(main, catalogSection);
-    setupLogin(main, loginSection, () => { setUserNav(); setActiveNav('catalogLink'); showCatalog() });
-    setupRegister(main, registerSection, () => { setUserNav(); setActiveNav('catalogLink'); showCatalog() });
-    setupCreate(main, createSection, () => { setActiveNav('catalogLink'); showCatalog() });
+    setupCatalog(main, catalogSection, setActiveNav);
+    setupLogin(main, loginSection, setActiveNav);
+    setupRegister(main, registerSection, setActiveNav);
+    setupCreate(main, createSection, setActiveNav);
 
     setupNavigation();
 
@@ -44,13 +43,14 @@ function main() {
     }
 
     function setupNavigation() {
+        document.getElementById('logoutBtn').addEventListener('click', logout);
+
         nav.addEventListener('click', event => {
             if (event.target.tagName == "A") {
                 const view = links[event.target.id];
 
                 if (typeof view == 'function') {
                     event.preventDefault();
-                    setActiveNav(event.target.id);
                     view();
                 }
             }
@@ -61,7 +61,6 @@ function main() {
         if (sessionStorage.getItem('authToken') != null) {
             document.getElementById('user').style.display = 'inline-block';
             document.getElementById('guest').style.display = 'none';
-            document.getElementById('logoutBtn').addEventListener('click', logout);
         } else {
             document.getElementById('guest').style.display = 'inline-block';
             document.getElementById('user').style.display = 'none';
