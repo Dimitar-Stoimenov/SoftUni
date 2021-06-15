@@ -1,4 +1,5 @@
 import { e } from './dom.js';
+import { showHome } from './home.js'
 
 async function getLikesByMovieId(id) {
     const response = await fetch(`http://localhost:3030/data/likes?where=movieId%3D%22${id}%22&distinct=_ownerId&count`);
@@ -22,7 +23,27 @@ async function getMovieById(id) {
     return data;
 }
 
-function createMovieCard(movie, likes, ownLike) {   
+async function onDelete(event, id) {
+    event.preventDefault();
+
+    const confirmed = confirm('Are you sure you want to delete this movie?');
+
+    if (confirmed) {
+        const response = await fetch('http://localhost:3030/data/movies/' + id, {
+            method: 'delete',
+            headers: { 'X-Authorization': sessionStorage.getItem('authToken') },
+        });
+        if (response.ok) {
+            alert('Movie deleted');
+            showHome();
+        } else {
+            const error = await response.json();
+            alert(error.message);
+        }
+    }
+}
+
+function createMovieCard(movie, likes, ownLike) {
     const controls = e('div', { className: 'col-md-4 text-center' },
         e('h3', { className: 'my-3' }, 'Movie Description'),
         e('p', {}, movie.description),
@@ -32,7 +53,7 @@ function createMovieCard(movie, likes, ownLike) {
 
     if (userId != null) {
         if (userId == movie._ownerId) {
-            controls.appendChild(e('a', { className: 'btn btn-danger', href: '#' }, 'Delete'));
+            controls.appendChild(e('a', { className: 'btn btn-danger', href: '#', onClick: (e) => onDelete(e, movie._id) }, 'Delete'));
             controls.appendChild(e('a', { className: 'btn btn-warning', href: '#' }, 'Edit'));
         } else if (ownLike.length == 0) {
             controls.appendChild(e('a', { className: 'btn btn-primary', href: '#', onClick: likeMovie }, 'Like'));
