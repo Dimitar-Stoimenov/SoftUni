@@ -31,7 +31,7 @@ function createMovieCard(movie, likes, ownLike) {
     const userId = sessionStorage.getItem('userId');
 
     if (userId != null) {
-        if (userId == movie._ownedId) {
+        if (userId == movie._ownerId) {
             controls.appendChild(e('a', { className: 'btn btn-danger', href: '#' }, 'Delete'));
             controls.appendChild(e('a', { className: 'btn btn-warning', href: '#' }, 'Edit'));
         } else if (ownLike.length == 0) {

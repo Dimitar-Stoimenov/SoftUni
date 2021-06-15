@@ -64,4 +64,28 @@ function setupNavigation() {
         event.preventDefault();
         showCreate();
     });
+
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+}
+
+async function logout() {
+    const token = sessionStorage.getItem('authToken');
+    const response = await fetch('http://localhost:3030/users/logout', {
+        method: 'get',
+        headers: { 'X-Authorization': token }
+    });
+
+    if (response.ok) {
+        sessionStorage.removeItem('authToken');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('userId');
+
+        [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'none');
+        [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'block');
+
+        showHome();
+    } else {
+        const error = await response.json();
+        alert(error.message);
+    }
 }
