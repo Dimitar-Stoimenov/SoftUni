@@ -1,10 +1,3 @@
-// import modules
-// grab sections
-// setup modules
-// setup navigaion
-
-import { e } from './dom.js';
-
 import { setupHome, showHome } from './home.js';
 import { setupDetails } from './details.js';
 import { setupLogin, showLogin } from './login.js';
