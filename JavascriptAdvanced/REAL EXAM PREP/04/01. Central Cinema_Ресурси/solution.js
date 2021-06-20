@@ -1,5 +1,7 @@
 function solve() {
     const onScreenBtn = document.querySelector('#container > button');
+    const archiveSectionUl = document.querySelector("#archive > ul");
+    archiveSectionUl.innerHTML = '';
 
     onScreenBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -23,7 +25,7 @@ function solve() {
 
             const divElement = document.createElement('div');
             const strongEl = document.createElement('strong');
-            strongEl.textContent = price.value;
+            strongEl.textContent = priceParsedToNumber.toFixed(2);
             divElement.appendChild(strongEl);
             const inputEl = document.createElement('input');
             inputEl.setAttribute('placeholder', 'Tickets Sold');
@@ -77,7 +79,6 @@ function solve() {
 
     const clearBtn = document.querySelector("#archive > button");
     clearBtn.addEventListener('click', () => {
-        const archiveSectionUl = document.querySelector("#archive > ul");
         archiveSectionUl.innerHTML = '';
     })
 }
