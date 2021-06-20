@@ -20,7 +20,7 @@ class Person {
 
     set age(value) {
         if ((value < 0 || value > 120)) {
-            return
+            return;
         } else {
             this.#currentAge = value;
         }
