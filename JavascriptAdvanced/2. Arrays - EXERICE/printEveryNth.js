@@ -5,3 +5,13 @@ function solve(input) {
 		console.log(input[index])
 	}
 }
+
+function solve(input, step) {
+	let result = [];
+
+	for (let index = 0; index < input.length; index += step) {
+		result.push(input[index]);
+	}
+
+	return result;	
+}

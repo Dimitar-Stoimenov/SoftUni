@@ -1,5 +1,4 @@
-function solve(input) {
-    let rotations = Number(input.pop())
+function solve(input, rotations) {
     let realRotations = rotations % input.length
  
     for (let i = 0; i < realRotations; i++) {
@@ -9,3 +8,12 @@ function solve(input) {
  
     console.log(input.join(' '))
 }
+
+solve(
+    ['1', 
+'2', 
+'3', 
+'4'], 
+2
+
+)

@@ -10,5 +10,5 @@ function solve(input) {
         }       
     }
     
-    console.log(consecutiveArr.join('\n'))
+    return consecutiveArr
 }
