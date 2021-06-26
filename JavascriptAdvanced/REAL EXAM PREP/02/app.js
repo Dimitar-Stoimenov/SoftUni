@@ -1,9 +1,9 @@
 class Story {
     constructor(title, creator) {
-        this.title = title,
-            this.creator = creator,
-            this._comments = [],
-            this._likes = []
+        this.title = title;
+        this.creator = creator;
+        this._comments = [];
+        this._likes = []
     }
 
     like(username) {
@@ -37,7 +37,7 @@ class Story {
     }
 
     comment(username, content, id) {
-        if (id == undefined) {
+        if (id == undefined || this._comments[(id - 1)] == undefined) {
             id = this._comments.length + 1;
         }
 
