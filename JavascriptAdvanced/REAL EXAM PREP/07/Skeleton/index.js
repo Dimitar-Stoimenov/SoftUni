@@ -47,7 +47,7 @@ function solve() {
         delBtn.addEventListener('click', e => {
             let parent = document.getElementById(module);
             let parentUl = parent.querySelector('ul');
-            
+
             e.target.parentNode.remove();
 
             if (parentUl.innerHTML == '') {
@@ -58,12 +58,16 @@ function solve() {
 
         liEl.appendChild(delBtn);
         currentUlEl.appendChild(liEl);
-        
+
         const moduleDiv = document.querySelector(`#${module}`);
         const ulElement = moduleDiv.querySelector('ul');
 
         [...ulElement.children]
             .sort((a, b) => (a.dataset.date).localeCompare(b.dataset.date))
             .forEach(node => ulElement.appendChild(node));
+
+        lectureNameEl.value = '';
+        dateEl.value = '';
+        moduleEl.value = '';
     })
 };
