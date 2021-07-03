@@ -90,5 +90,30 @@ describe('E2E tests', function () {
             expect(postData.email).to.equal(email);
             expect(postData.password).to.equal(password);
         });
+
+        it.only('login sends correct request', async () => {
+            await page.route('**/users/login', route => route.fulfill(json({ id: '0001', email, accessToken: 'AAAA' })))
+
+            const email = 'john@abv.bg';
+            const password = '123123';
+
+            await page.goto('http://localhost:3000');
+            await page.click('text=Login');
+
+            await page.waitForSelector('form');
+
+            await page.fill('[name="email"]', email);
+            await page.fill('[name="password"]', password);
+
+            const [request] = await Promise.all([
+                page.waitForRequest(request => request.url().includes('/users/login') && request.method() == 'POST'),
+                page.click('[type="submit"]'),
+            ]);
+
+            const postData = JSON.parse(request.postData());
+
+            expect(postData.email).to.equal(email);
+            expect(postData.password).to.equal(password);
+        });
     });
 });
