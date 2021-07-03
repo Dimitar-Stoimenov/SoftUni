@@ -2,6 +2,18 @@
 const { chromium } = require('playwright-chromium');
 const { expect } = require('chai');
 
+const mockData = require('./mock-data.json');
+
+function json(data) {
+    return {
+        status: 200,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    }
+}
 
 let browser;
 let context;
@@ -36,4 +48,47 @@ describe('E2E tests', function () {
         await context.close();
     });
 
+    describe('Catalog', async () => {
+        it('loads and displays recipes', async () => {
+            await page.route('**/data/recipes*', (request) => request.fulfill(json(mockData.list)));
+            // page.route фалшифицира отговора на сървъра
+
+            await page.goto('http://localhost:3000');
+
+            await page.waitForSelector('article');
+
+            const titles = await page.$$eval('h2', titles => titles.map(t => t.textContent));
+            expect(titles[0]).to.contains('Easy Lasagna');
+            expect(titles[1]).to.contains('Grilled Duck Fillet');
+            expect(titles[2]).to.contains('Roast Trout');
+        });
+    });
+
+    describe('Authentication', () => {
+        it.only('register sends correct request', async () => {
+            await page.route('**/users/register', route => route.fulfill(json({ id: '0001', email, accessToken: 'AAAA' })))
+
+            const email = 'john@abv.bg';
+            const password = '123123';
+
+            await page.goto('http://localhost:3000');
+            await page.click('text=Register');
+
+            await page.waitForSelector('form');
+
+            await page.fill('[name="email"]', email);
+            await page.fill('[name="password"]', password);
+            await page.fill('[name="rePass"]', password);
+
+            const [request] = await Promise.all([
+                page.waitForRequest(request => request.url().includes('/users/register') && request.method() == 'POST'),
+                page.click('[type="submit"]'),
+            ]);
+
+            const postData = JSON.parse(request.postData());
+
+            expect(postData.email).to.equal(email);
+            expect(postData.password).to.equal(password);
+        });
+    });
 });

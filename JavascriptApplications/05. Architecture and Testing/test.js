@@ -15,7 +15,7 @@ describe('E2E tests', () => {
     beforeEach(async () => {
         page = await browser.newPage();
     });
-    
+
     afterEach(async () => {
         await page.close();
     });
