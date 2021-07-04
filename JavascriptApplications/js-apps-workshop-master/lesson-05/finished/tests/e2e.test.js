@@ -3,7 +3,7 @@ const { chromium } = require('playwright-chromium');
 const { expect } = require('chai');
 
 const mockData = require('./mock-data.json');
-const host = 'http://localhost:3000';
+const host = 'http://localhost:5500';
 const endpoints = {
     recipes: '/data/recipes?select=_id%2Cname%2Cimg',
     count: '/data/recipes?count',

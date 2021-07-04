@@ -5,14 +5,13 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "@types/mocha": "^8.2.2",
+    "@types/mocha": "^8.2.0",
     "http-server": "^0.12.3",
+    "chai": "^4.3.3",
     "playwright-chromium": "^1.8.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "http-server lesson-07/finished -a localhost -p 3000 -P http://localhost:3000?",
-    "server": "server.bat"
+    "dev": "http-server -a localhost -p 3000 -P http://localhost:3000?"
   },
   "repository": {
     "type": "git",
