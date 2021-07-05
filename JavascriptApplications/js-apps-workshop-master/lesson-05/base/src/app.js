@@ -5,7 +5,6 @@ import { setupRegister, showRegister } from './register.js';
 import { setupDetails } from './details.js';
 import { setupEdit } from './edit.js';
 
-
 window.addEventListener('load', async () => {
     setUserNav();
 
@@ -70,6 +69,7 @@ window.addEventListener('load', async () => {
         });
         if (response.status == 200) {
             sessionStorage.removeItem('authToken');
+            sessionStorage.removeItem('userId');
             setUserNav();
             showCatalog();
         } else {

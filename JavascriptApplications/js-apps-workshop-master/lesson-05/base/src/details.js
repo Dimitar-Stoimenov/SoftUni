@@ -1,35 +1,12 @@
 import { e } from './dom.js';
 import { showEdit } from './edit.js';
+import { getRecipeById, deleteRecipeById } from './api/data.js';
 
+async function deleteRecipe(id) {
+    await deleteRecipeById(id);
 
-async function getRecipeById(id) {
-    const response = await fetch('http://localhost:3030/data/recipes/' + id);
-    const recipe = await response.json();
-
-    return recipe;
-}
-
-async function deleteRecipeById(id) {
-    const token = sessionStorage.getItem('authToken');
-
-    try {
-        const response = await fetch('http://localhost:3030/data/recipes/' + id, {
-            method: 'delete',
-            headers: {
-                'X-Authorization': token
-            }
-        });
-
-        if (response.status != 200) {
-            const error = await response.json();
-            throw new Error(error.message);
-        }
-
-        section.innerHTML = '';
-        section.appendChild(e('article', {}, e('h2', {}, 'Recipe deleted')));
-    } catch (err) {
-        alert(err.message);
-    }
+    section.innerHTML = '';
+    section.appendChild(e('article', {}, e('h2', {}, 'Recipe deleted')));
 }
 
 function createRecipeCard(recipe) {
@@ -61,7 +38,7 @@ function createRecipeCard(recipe) {
     function onDelete() {
         const confirmed = confirm(`Are you sure you want to delete ${recipe.name}?`);
         if (confirmed) {
-            deleteRecipeById(recipe._id);
+            deleteRecipe(recipe._id);
         }
     }
 }

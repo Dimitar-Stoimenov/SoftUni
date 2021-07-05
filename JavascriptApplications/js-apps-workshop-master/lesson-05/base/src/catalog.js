@@ -1,12 +1,6 @@
 import { e } from './dom.js';
 import { showDetails } from './details.js';
-
-async function getRecipes() {
-    const response = await fetch('http://localhost:3030/data/recipes?select=' + encodeURIComponent('_id,name,img'));
-    const recipes = await response.json();
-
-    return recipes;
-}
+import { getRecipes } from './api/data.js';
 
 function createRecipePreview(recipe) {
     const result = e('article', { className: 'preview', onClick: () => showDetails(recipe._id) },

@@ -1,5 +1,5 @@
 import { showCatalog } from './catalog.js';
-
+import { register } from './api/data.js';
 
 let main;
 let section;
@@ -22,37 +22,14 @@ export function setupRegister(targetMain, targetSection, onActiveNav) {
             return alert('Passwords don\'t match');
         }
 
-        const body = JSON.stringify({
-            email: data.email,
-            password: data.password,
-        });
+        await register(data.email, data.password);
 
-        try {
-            const response = await fetch('http://localhost:3030/users/register', {
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body
-            });
-            const data = await response.json();
-            if (response.status == 200) {
-                sessionStorage.setItem('authToken', data.accessToken);
-                sessionStorage.setItem('userId', data._id);
-                document.getElementById('user').style.display = 'inline-block';
-                document.getElementById('guest').style.display = 'none';
+        document.getElementById('user').style.display = 'inline-block';
+        document.getElementById('guest').style.display = 'none';
 
-                showCatalog();
-            } else {
-                alert(data.message);
-                throw new Error(data.message);
-            }
-        } catch (err) {
-            console.error(err.message);
-        }
+        showCatalog();
     }
 }
-
 
 export function showRegister() {
     setActiveNav('registerLink');
