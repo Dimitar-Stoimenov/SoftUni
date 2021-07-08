@@ -1,6 +1,6 @@
-import { e } from './dom.js';
+import { e } from '../dom.js';
 import { showEdit } from './edit.js';
-import { getRecipeById, deleteRecipeById } from './api/data.js';
+import { getRecipeById, deleteRecipeById } from '../api/data.js';
 
 async function deleteRecipe(id) {
     await deleteRecipeById(id);

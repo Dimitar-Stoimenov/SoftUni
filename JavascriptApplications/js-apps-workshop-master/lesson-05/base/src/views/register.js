@@ -1,15 +1,14 @@
 import { showCatalog } from './catalog.js';
-import { login } from './api/data.js';
+import { register } from '../api/data.js';
 
 let main;
 let section;
 let setActiveNav;
 
-export function setupLogin(targetMain, targetSection, onActiveNav) {
+export function setupRegister(targetMain, targetSection, onActiveNav) {
     main = targetMain;
     section = targetSection;
     setActiveNav = onActiveNav;
-
     const form = targetSection.querySelector('form');
 
     form.addEventListener('submit', (ev => {
@@ -19,7 +18,11 @@ export function setupLogin(targetMain, targetSection, onActiveNav) {
     }));
 
     async function onSubmit(data) {
-        await login(data.email, data.password);
+        if (data.password != data.rePass) {
+            return alert('Passwords don\'t match');
+        }
+
+        await register(data.email, data.password);
 
         document.getElementById('user').style.display = 'inline-block';
         document.getElementById('guest').style.display = 'none';
@@ -28,8 +31,8 @@ export function setupLogin(targetMain, targetSection, onActiveNav) {
     }
 }
 
-export function showLogin() {
-    setActiveNav('loginLink');
+export function showRegister() {
+    setActiveNav('registerLink');
     main.innerHTML = '';
     main.appendChild(section);
 }

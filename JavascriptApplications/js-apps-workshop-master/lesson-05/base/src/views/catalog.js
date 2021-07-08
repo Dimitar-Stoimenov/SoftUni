@@ -1,6 +1,6 @@
-import { e } from './dom.js';
+import { e } from '../dom.js';
 import { showDetails } from './details.js';
-import { getRecipes } from './api/data.js';
+import { getRecipes } from '../api/data.js';
 
 function createRecipePreview(recipe) {
     const result = e('article', { className: 'preview', onClick: () => showDetails(recipe._id) },

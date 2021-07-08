@@ -5,6 +5,8 @@ api.settings.host = host;
 
 export const login = api.login;
 export const register = api.register;
+export const logout = api.logout;
+
 
 export async function getRecipes() {
     return await api.get(host + '/data/recipes?select=' + encodeURIComponent('_id,name,img'));

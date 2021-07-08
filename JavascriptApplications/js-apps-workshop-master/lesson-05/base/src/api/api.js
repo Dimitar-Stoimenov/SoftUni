@@ -70,3 +70,11 @@ export async function register(email, password) {
 
     return response;
 }
+
+export async function logout() {
+    const response = await get(settings.host + '/users/logout');
+
+    sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('userId');
+}
