@@ -12,7 +12,6 @@
 export function createNavigation(main, nav) {
     const links = {};
     const views = {};
-
     setupNavigation();
 
     return {
