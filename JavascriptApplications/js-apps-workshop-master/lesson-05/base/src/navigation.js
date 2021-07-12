@@ -10,16 +10,37 @@
 // - registerView
 
 export function createNavigation(main, nav) {
-    const links = {};
     const views = {};
+    const links = {};
+
     setupNavigation();
 
-    return {
-        setUserNav
+    const navigation = {
+        setUserNav,
+        registerView,
+        goTo,
     };
 
+    return navigation;
+
+    async function goTo(name) {
+        main.innerHTML = '';
+        const section = await views[name]();
+        main.appendChild(section);
+    }
+
+    function registerView(name, section, setup, navId) {
+        const view = setup(section, navigation);
+
+        views[name] = view;
+        if (navId) {
+            links[navId] = name;
+        }
+    }
 
     function setupNavigation() {
+        setUserNav();
+
         nav.addEventListener('click', (ev) => {
             if (ev.target.tagName == 'A') {
                 const handler = links[ev.target.id];

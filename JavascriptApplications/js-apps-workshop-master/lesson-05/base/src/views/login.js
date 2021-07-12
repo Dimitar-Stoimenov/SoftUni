@@ -1,4 +1,3 @@
-import { showCatalog } from './catalog.js';
 import { login } from '../api/data.js';
 
 let main;

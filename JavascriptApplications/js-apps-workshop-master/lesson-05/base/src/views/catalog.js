@@ -11,27 +11,20 @@ function createRecipePreview(recipe) {
     return result;
 }
 
-let main;
-let section;
-let setActiveNav;
+export function setupCatalog(section, navigation) {
+    return showCatalog;
 
-export function setupCatalog(targetMain, targetSection, onActiveNav) {
-    main = targetMain;
-    section = targetSection;
-    setActiveNav = onActiveNav;
-}
+    async function showCatalog() {
+        section.innerHTML = 'Loading&hellip;';
 
-export async function showCatalog() {
-    setActiveNav('catalogLink');
-    section.innerHTML = 'Loading&hellip;';
-    main.innerHTML = '';
-    main.appendChild(section);
+        const recipes = await getRecipes();
+        const cards = recipes.map(createRecipePreview);
 
-    const recipes = await getRecipes();
-    const cards = recipes.map(createRecipePreview);
+        const fragment = document.createDocumentFragment();
+        cards.forEach(c => fragment.appendChild(c));
+        section.innerHTML = '';
+        section.appendChild(fragment);
 
-    const fragment = document.createDocumentFragment();
-    cards.forEach(c => fragment.appendChild(c));
-    section.innerHTML = '';
-    section.appendChild(fragment);
+        return section;
+    }
 }
