@@ -1,4 +1,4 @@
-import { showDetails } from './details.js';
+// import { showDetails } from './details.js';
 import { createRecipe } from '../api/data.js';
 
 let main;
@@ -26,7 +26,7 @@ export function setupCreate(targetMain, targetSection, onActiveNav) {
         };
 
         const result = createRecipe(body);
-        showDetails(result._id);
+        //showDetails(result._id);
     }
 }
 

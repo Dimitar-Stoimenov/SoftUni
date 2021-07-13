@@ -43,10 +43,11 @@ export function createNavigation(main, nav) {
 
         nav.addEventListener('click', (ev) => {
             if (ev.target.tagName == 'A') {
-                const handler = links[ev.target.id];
-                if (handler) {
+                const viewName = links[ev.target.id];
+
+                if (viewName) {
                     ev.preventDefault();
-                    handler();
+                    goTo(viewName);
                 }
             }
         });

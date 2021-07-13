@@ -1,7 +1,7 @@
 import { setupCatalog } from './views/catalog.js';
-import { setupCreate, showCreate } from './views/create.js';
-import { setupLogin, showLogin } from './views/login.js';
-import { setupRegister, showRegister } from './views/register.js';
+import { setupCreate, } from './views/create.js';
+import { setupLogin, } from './views/login.js';
+import { setupRegister, } from './views/register.js';
 import { setupDetails } from './views/details.js';
 import { setupEdit } from './views/edit.js';
 import { logout as apiLogout } from './api/data.js';
@@ -18,12 +18,13 @@ window.addEventListener('load', async () => {
 
     navigation.registerView('catalog', document.getElementById('catalog'), setupCatalog, 'catalogLink');
     navigation.registerView('details', document.getElementById('details'), setupDetails);
+    navigation.registerView('login', document.getElementById('login'), setupLogin, 'loginLink');
+    navigation.registerView('register', document.getElementById('register'), setupRegister, 'registerLink');
 
     navigation.goTo('catalog');
 
     /*
     setupCreate(main, document.getElementById('create'), setActiveNav);
-    setupLogin(main, document.getElementById('login'), setActiveNav);
     setupRegister(main, document.getElementById('register'), setActiveNav);
     setupEdit(main, document.getElementById('edit'), setActiveNav);
     document.getElementById('views').remove();

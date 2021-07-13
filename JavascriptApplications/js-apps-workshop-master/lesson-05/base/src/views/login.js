@@ -1,15 +1,7 @@
 import { login } from '../api/data.js';
 
-let main;
-let section;
-let setActiveNav;
-
-export function setupLogin(targetMain, targetSection, onActiveNav) {
-    main = targetMain;
-    section = targetSection;
-    setActiveNav = onActiveNav;
-
-    const form = targetSection.querySelector('form');
+export function setupLogin(section, navigation) {
+    const form = section.querySelector('form');
 
     form.addEventListener('submit', (ev => {
         ev.preventDefault();
@@ -17,18 +9,18 @@ export function setupLogin(targetMain, targetSection, onActiveNav) {
         onSubmit([...formData.entries()].reduce((p, [k, v]) => Object.assign(p, { [k]: v }), {}));
     }));
 
+    return showLogin;
+
+    function showLogin() {
+        return section;
+    }
+
     async function onSubmit(data) {
         await login(data.email, data.password);
 
         document.getElementById('user').style.display = 'inline-block';
         document.getElementById('guest').style.display = 'none';
 
-        showCatalog();
+        navigation.goTo('catalog');
     }
-}
-
-export function showLogin() {
-    setActiveNav('loginLink');
-    main.innerHTML = '';
-    main.appendChild(section);
 }

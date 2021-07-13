@@ -17,10 +17,10 @@ export function setupCatalog(section, navigation) {
         section.innerHTML = 'Loading&hellip;';
 
         const recipes = await getRecipes();
-        const cards = recipes.map(createRecipePreview);
+        const cards = recipes.map(r => createRecipePreview(r, navigation.goTo));
 
         const fragment = document.createDocumentFragment();
-        cards.forEach(c => fragment.appendChild(c), navigation.goTo);
+        cards.forEach(c => fragment.appendChild(c));
         section.innerHTML = '';
         section.appendChild(fragment);
 

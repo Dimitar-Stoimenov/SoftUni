@@ -1,4 +1,4 @@
-import { showDetails } from './details.js';
+// import { showDetails } from './details.js';
 import { getRecipeById, editRecipeById } from '../api/data.js';
 
 let main;
@@ -28,7 +28,7 @@ export function setupEdit(targetMain, targetSection, onActiveNav) {
 
 
         await editRecipeById(recipeId, body)
-        showDetails(recipeId);
+        // showDetails(recipeId);
     }
 }
 
