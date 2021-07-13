@@ -1,9 +1,8 @@
 import { e } from '../dom.js';
-import { showDetails } from './details.js';
 import { getRecipes } from '../api/data.js';
 
-function createRecipePreview(recipe) {
-    const result = e('article', { className: 'preview', onClick: () => showDetails(recipe._id) },
+function createRecipePreview(recipe, goTo) {
+    const result = e('article', { className: 'preview', onClick: () => goTo('details', recipe._id) },
         e('div', { className: 'title' }, e('h2', {}, recipe.name)),
         e('div', { className: 'small' }, e('img', { src: recipe.img })),
     );
@@ -21,7 +20,7 @@ export function setupCatalog(section, navigation) {
         const cards = recipes.map(createRecipePreview);
 
         const fragment = document.createDocumentFragment();
-        cards.forEach(c => fragment.appendChild(c));
+        cards.forEach(c => fragment.appendChild(c), navigation.goTo);
         section.innerHTML = '';
         section.appendChild(fragment);
 

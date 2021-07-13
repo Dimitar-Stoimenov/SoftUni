@@ -23,9 +23,9 @@ export function createNavigation(main, nav) {
 
     return navigation;
 
-    async function goTo(name) {
+    async function goTo(name, ...params) {
         main.innerHTML = '';
-        const section = await views[name]();
+        const section = await views[name](...params);
         main.appendChild(section);
     }
 

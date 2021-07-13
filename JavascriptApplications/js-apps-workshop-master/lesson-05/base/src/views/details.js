@@ -1,15 +1,7 @@
 import { e } from '../dom.js';
-import { showEdit } from './edit.js';
 import { getRecipeById, deleteRecipeById } from '../api/data.js';
 
-async function deleteRecipe(id) {
-    await deleteRecipeById(id);
-
-    section.innerHTML = '';
-    section.appendChild(e('article', {}, e('h2', {}, 'Recipe deleted')));
-}
-
-function createRecipeCard(recipe) {
+function createRecipeCard(recipe, goTo, deleteRecipe) {
     const result = e('article', {},
         e('h2', {}, recipe.name),
         e('div', { className: 'band' },
@@ -28,7 +20,7 @@ function createRecipeCard(recipe) {
     const userId = sessionStorage.getItem('userId');
     if (userId != null && recipe._ownerId == userId) {
         result.appendChild(e('div', { className: 'controls' },
-            e('button', { onClick: () => showEdit(recipe._id) }, '\u270E Edit'),
+            e('button', { onClick: () => goTo('details', recipe._id) }, '\u270E Edit'),
             e('button', { onClick: onDelete }, '\u2716 Delete'),
         ));
     }
@@ -43,23 +35,23 @@ function createRecipeCard(recipe) {
     }
 }
 
-let main;
-let section;
-let setActiveNav;
+export function setupDetails(section, navigation) {
+    return showDetails;
 
-export function setupDetails(targetMain, targetSection, onActiveNav) {
-    main = targetMain;
-    section = targetSection;
-    setActiveNav = onActiveNav;
-}
+    async function showDetails(id) {
+        section.innerHTML = 'Loading&hellip;';
 
-export async function showDetails(id) {
-    setActiveNav();
-    section.innerHTML = 'Loading&hellip;';
-    main.innerHTML = '';
-    main.appendChild(section);
+        const recipe = await getRecipeById(id);
+        section.innerHTML = '';
+        section.appendChild(createRecipeCard(recipe, navigation.goTo, deleteRecipe));
 
-    const recipe = await getRecipeById(id);
-    section.innerHTML = '';
-    section.appendChild(createRecipeCard(recipe));
+        return section;
+    }
+
+    async function deleteRecipe(id) {
+        await deleteRecipeById(id);
+
+        section.innerHTML = '';
+        section.appendChild(e('article', {}, e('h2', {}, 'Recipe deleted')));
+    }
 }

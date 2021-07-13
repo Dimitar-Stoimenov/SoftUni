@@ -17,15 +17,14 @@ window.addEventListener('load', async () => {
     const navigation = createNavigation(main, nav);
 
     navigation.registerView('catalog', document.getElementById('catalog'), setupCatalog, 'catalogLink');
+    navigation.registerView('details', document.getElementById('details'), setupDetails);
 
     navigation.goTo('catalog');
 
     /*
-    const showCatalog = setupCatalog(main, document.getElementById('catalog'), setActiveNav);
     setupCreate(main, document.getElementById('create'), setActiveNav);
     setupLogin(main, document.getElementById('login'), setActiveNav);
     setupRegister(main, document.getElementById('register'), setActiveNav);
-    setupDetails(main, document.getElementById('details'), setActiveNav);
     setupEdit(main, document.getElementById('edit'), setActiveNav);
     document.getElementById('views').remove();
 
@@ -56,7 +55,7 @@ window.addEventListener('load', async () => {
         });
     }
     */
-    
+
     function setActiveNav(targetId) {
         [...nav.querySelectorAll('a')].forEach(a => a.id == targetId ? a.classList.add('active') : a.classList.remove('active'));
     }
