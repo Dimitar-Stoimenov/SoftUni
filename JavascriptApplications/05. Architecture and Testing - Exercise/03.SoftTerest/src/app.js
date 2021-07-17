@@ -18,9 +18,10 @@ const navigation = {
 registerView('home', document.getElementById('home-page'), setupHome, 'homeLink');
 registerView('login', document.getElementById('login-page'), setupLogin, 'loginLink');
 registerView('register', document.getElementById('register-page'), setupRegister, 'registerLink');
-registerView('dashboard', document.getElementById('dasboard-holder'), setupDashboard, 'dashboardLink');
+registerView('dashboard', document.getElementById('dashboard-holder'), setupDashboard, 'dashboardLink');
 registerView('create', document.getElementById('create-page'), setupCreate, 'createLink');
 registerView('details', document.getElementById('details-page'), setupDetails);
+document.getElementById('views').remove();
 
 setupNavigation();
 
@@ -48,7 +49,7 @@ function setupNavigation() {
     setUserNav();
 
     nav.addEventListener('click', (ev) => {
-        const viewName = links[ev.target.id];
+        const viewName = links[ev.target.id];        
 
         if (viewName) {
             ev.preventDefault();
