@@ -12,7 +12,8 @@ const views = {};
 const links = {};
 
 const navigation = {
-    goTo
+    goTo,
+    setUserNav
 };
 
 registerView('home', document.getElementById('home-page'), setupHome, 'homeLink');
@@ -49,7 +50,7 @@ function setupNavigation() {
     setUserNav();
 
     nav.addEventListener('click', (ev) => {
-        const viewName = links[ev.target.id];        
+        const viewName = links[ev.target.id];
 
         if (viewName) {
             ev.preventDefault();
