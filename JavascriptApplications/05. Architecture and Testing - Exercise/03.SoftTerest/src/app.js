@@ -4,7 +4,6 @@ import { setupRegister } from './views/register.js';
 import { setupDashboard } from './views/dashboard.js';
 import { setupDetails } from './views/details.js';
 import { setupCreate } from './views/create.js';
-import { logout } from './api/data.js';
 
 const main = document.querySelector('main');
 const nav = document.querySelector('nav');
@@ -53,6 +52,12 @@ function setupNavigation() {
     nav.addEventListener('click', async (ev) => {
         const viewName = links[ev.target.id];
 
+        if (ev.target.id == 'logoutBtn') {
+            ev.preventDefault();
+
+            return await logout();
+        }
+
         if (viewName) {
             ev.preventDefault();
             goTo(viewName);
@@ -69,5 +74,18 @@ function setUserNav() {
     } else {
         [...nav.querySelectorAll('.user-nav')].forEach(e => e.style.display = 'none');
         [...nav.querySelectorAll('.guest-nav')].forEach(e => e.style.display = 'list-item');
+    }
+}
+
+async function logout() {
+    try {
+        sessionStorage.removeItem('authToken');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('userId');
+
+        setUserNav();
+        goTo('home');
+    } catch (err) {
+        alert(err.message);
     }
 }
