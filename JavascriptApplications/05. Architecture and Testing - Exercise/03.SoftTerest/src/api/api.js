@@ -77,4 +77,6 @@ export async function logout() {
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('userId');
+
+    return response;
 }

@@ -4,6 +4,7 @@ import { setupRegister } from './views/register.js';
 import { setupDashboard } from './views/dashboard.js';
 import { setupDetails } from './views/details.js';
 import { setupCreate } from './views/create.js';
+import { logout } from './api/data.js';
 
 const main = document.querySelector('main');
 const nav = document.querySelector('nav');
@@ -49,7 +50,7 @@ async function goTo(name, ...params) {
 function setupNavigation() {
     setUserNav();
 
-    nav.addEventListener('click', (ev) => {
+    nav.addEventListener('click', async (ev) => {
         const viewName = links[ev.target.id];
 
         if (viewName) {

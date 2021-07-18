@@ -14,3 +14,11 @@ export async function getIdeas() {
 export async function getIdeaById(id) {
     return await api.get(host + '/data/ideas/' + id);
 }
+
+export async function createIdea(idea) {
+    return await api.post(host + '/data/ideas', idea);
+}
+
+export async function deleteIdeaById(id) {
+    return await api.del(host + '/data/ideas/' + id);
+}
