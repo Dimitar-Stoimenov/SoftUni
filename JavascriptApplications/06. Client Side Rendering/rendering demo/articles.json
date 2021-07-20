@@ -1,0 +1,22 @@
+[
+    {
+        "title": "First Article",
+        "content": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum, consequuntur. Reprehenderit recusandae corrupti corporis, aliquam repellendus sint voluptas, ut dolore iste inventore a quia. Ab quia ullam dolorum facere id.",
+        "author": "Peter Peterson"
+    },
+    {
+        "title": "Second Article",
+        "content": "Aba Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum, consequuntur. Reprehenderit recusandae.",
+        "author": "John Smith"
+    },
+    {
+        "title": "Third Article",
+        "content": "Aliquam repellendus sint voluptas, ut dolore iste inventore a quia. Ab quia ullam dolorum facere id.",
+        "author": "Mary Poppins"
+    },
+    {
+        "title": "Fourth Article",
+        "content": "Eha Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde assumenda doloribus reiciendis nostrum numquam eveniet asperiores obcaecati nisi porro at fugiat recusandae quod, repellendus laborum corporis neque aspernatur, vel id?",
+        "author": "George Jackson"
+    }
+]
